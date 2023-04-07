@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  background: #fff;
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
 }
 
 
@@ -12,32 +12,60 @@
   top: 0;
   left: 0;
   width: 100%;
+  min-width: 600px;
   height: 60px;
   z-index: 9999;
-  background: rgb(62, 183, 244);
+  background: #fff;
+  border-bottom: 1px solid #E8E8E8;
 }
 
   .header_cont {
     display: flex;
     justify-content: space-between;
-    margin: 0 10%;
+    margin: 0 8%;
     align-items: center;
     height: 100%;
   }
   .header_title {
     font-size: 22px;
   }
+  .header_r {
+    display: flex;
+  }
+  .header_search {
+    font-size: 16px;
+    margin-left: 20px;
+  }
   .header_nav {
     display: flex;
-    font-size: 16px;
+    font-size: 16px;;
   }
-  .header_nav li {
-    margin-right: 20px;
+  .header_nav li a {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+  }
+  .header_nav li a div:nth-child(1) {
+    color: #4F4F4F;
+    font-size: 12px;
+    margin-right: 2px;
   }
 
+  .header_nav li a:hover div {
+    color: #009933;
+  }
+  .isActive {
+    color: #009933 !important;
+  }
+  .isActive div {
+    color: #009933 !important;
+  }
 .content {
   padding-top: 60px;
   margin: 16px 12%;
+  padding-bottom: 40px;
   display: flex;
   justify-content: space-between;
 }
@@ -48,7 +76,7 @@
       width: 100%;
       display: flex;
       overflow: hidden;
-      background: rgba(251, 220, 220, .9);
+      background: #fff;
       margin-bottom: 16px;
       border-radius: 6px;
       color: #848484;
@@ -88,7 +116,6 @@
         margin-left: 4px;
       }
   .cont_r {
-    background: #fff;
     margin-left: 16px;
     width: 180px;
   }
@@ -101,7 +128,7 @@
       padding: 20px;
       border-radius: 6px;
       width: 100%;
-      background: rgba(251, 220, 220, .9);
+      background: #fff;
     }
     .pres_inif_title {
       font-size: 16px;
@@ -162,11 +189,12 @@
 .footer {
   padding: 20px 0;
   display: flex;
+  background: #fff;
   align-items: center;
   justify-content: center;
   border-top: 1px solid #f3f3f3;
 }
 
-  .record {
+  /* .record {
 
-  }
+  } */

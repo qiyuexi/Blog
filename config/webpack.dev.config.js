@@ -11,6 +11,7 @@ const devConfig = {
     port: 8080,
     open: false,
     compress: true,
+    historyApiFallback: true,
   }
 }
 
