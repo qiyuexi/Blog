@@ -12,7 +12,15 @@ const devConfig = {
     open: false,
     compress: true,
     historyApiFallback: true,
-  }
+    proxy: {
+      '/api': 'http://localhost:3000'
+      // '/api': {
+      //   target: 'http://localhost:3000',
+      //   changeOrigin: true,  //是否跨域
+      //   pathRewrite: { '^/api': '/' }
+      // }
+    }
+  },
 }
 
 module.exports = merge(BaseCongfig, devConfig)

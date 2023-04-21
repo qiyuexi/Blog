@@ -70,7 +70,7 @@ const routes = [
     element: <Layout />,
     children: [
       {
-        path: '/article/:title',
+        path: '/article/:id',
         name: '文章',
         element: <Article />
       }

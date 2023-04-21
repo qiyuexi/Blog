@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {  } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { Button } from 'antd';
 import './index.css'
 import Img from '../../../public/img/img_1.jpg'
 
+
+
 export default function Home() {
   const navigate = useNavigate()
+  
   return (
     <div className='home_style'>
       <div className='home_cont'>

@@ -1,22 +1,28 @@
 import React, { useState,useRef, useEffect, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { SearchOutlined, FileOutlined, LinkOutlined } from '@ant-design/icons';
+import req from '../../http/http'
 import './inex.css'
 export default function Search() {
   const navigate = useNavigate()
   const [userQuery, setUserQuery] = useState("");
-  const articleList = [
-    {
-      title: '这是标题',
-      text: '到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。1到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。1'
-    },
-    {
-      title: '这是标题1221',
-      text: '到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。1到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。到的内容。。。1'
-    },
-  ]
+  const [articleList, useArticleList] = useState([])
+
   const sendQuery = (query) => {
-    console.log('防抖---',query);
+    if (userQuery !== '') {
+      req({
+        url: '/search',
+        method: 'post',
+        params: {
+          title: query
+        }
+      }).then(res => {
+        // console.log(res,' ---axios');
+        useArticleList([...res.data])
+      })
+    } else {
+      useArticleList([])
+    }
   };
   const delayedQuery = useDebounce(q => sendQuery(q), 500);
   const onChange = e => {
@@ -25,7 +31,6 @@ export default function Search() {
     delayedQuery(val)
   };
   const onSearch = () => {
-    console.log(userQuery, '----')
     sendQuery(userQuery)
   }
   return (
@@ -41,7 +46,7 @@ export default function Search() {
         {
           articleList.map((item, index) => {
             return (
-              <Link key={'key' + index} to={{ pathname: `/article/${item.title}` }}>
+              <Link key={'key' + index} to={{ pathname: `/article/${item.id}` }}>
                 <li className="search_cont_item">
                   <div className="search_cont_icon">
                     <FileOutlined />
@@ -64,6 +69,18 @@ export default function Search() {
           })
         }
       </ul>
+      <div>
+        {
+          articleList.length<=0 ? 
+            <p style={{ marginBottom: '20px', fontSize: '22px', textAlign: 'center' }}>: )</p>
+            : ''
+        }
+        <p style={{ fontSize: '18px' }}>
+          {
+            articleList.length<=0 ? '这里什么都么有，要不搜索看看' : '到底了'
+          }
+        </p>
+      </div>
     </div>
   )
 }

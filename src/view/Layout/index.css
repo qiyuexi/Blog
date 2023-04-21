@@ -177,6 +177,7 @@
       }
       .recent_art_cont li span {
         display: inline-block;
+        width: 100%;
       }
       .recent_art_cont li span:first-child {
         font-weight: 600;
