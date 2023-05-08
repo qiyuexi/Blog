@@ -34,7 +34,7 @@ export default function Blog() {
       }
     }).then(res => {
       console.log(res, '---');
-      setBlogList([...res.data])
+      setBlogList([...res.data.list])
     })
   },[])
   return (
