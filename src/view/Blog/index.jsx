@@ -9,12 +9,14 @@ import {
 } from '@ant-design/icons';
 export default function Blog() {
   const [latestArticle, setLatestArticle] = useState([])
+  const listHeight = useRef()
   const [blogList, setBlogList] = useState([])
   const inifNav = [
     { text: '文章', count: blogList.length },
     { text: '标签', count: 11 },
     { text: '分类', count: 15 },
   ]
+  const [page, setPage] = useState(1)
   useEffect(() => {
     request({
       url: '/latestArticle',
@@ -25,22 +27,39 @@ export default function Blog() {
     }).then(res => {
       setLatestArticle([...res.data])
     })
+    req()
+  },[page])
+  const onScrol = () => {
+    window.addEventListener('scroll', scorl)
+  }
+  const req = () => {
     request({
       url: '/blog',
       method: 'post',
       data: {
-        page: 1,
+        page,
         pageSize: 10
       }
     }).then(res => {
-      setBlogList([...res.data.list])
+      const list = [...blogList, ...res.data.list]
+      setBlogList(list)
     })
-  },[])
-
-  
+  }
+  const scorl = () => {
+    const winH = window.innerHeight;
+    const top = document.documentElement.scrollTop
+    const h = listHeight.current.clientHeight + 40
+    const s = h - winH + 21
+    console.log(s -top , '22--', top);
+    if (s - top  < 50) {
+      console.log('即将触底---');
+      setPage(page+1)
+      console.log(page, 'page---');
+    }
+  }
   return (
     <>
-      <ul className="cont_l">
+      <ul className="cont_l" ref={listHeight} onScroll={onScrol()}>
         {
           blogList.length? blogList.map(item => {
               return (
