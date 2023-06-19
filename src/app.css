@@ -8,6 +8,7 @@ body{
   display: flex;
   width: 100%;
   flex-direction: column;
-
+  /* background-image: linear-gradient(to top, #a8edea, #fed6e3 ); */
+  background: #eeeeee;
 }
 

@@ -34,52 +34,54 @@ export default function Search() {
     sendQuery(userQuery)
   }
   return (
-    <div className="search_style">
-      <h1>站内搜索</h1>
-      <div className="search_inpit">
-        <input type="text" placeholder="文章关键字搜索..." onChange={onChange} value={userQuery} />
-        <div className="search_btn" onClick={onSearch} >
-          <SearchOutlined />
+    <div style={{width: '100%'}}>
+      <div className="search_style">
+        <h1>站内搜索</h1>
+        <div className="search_inpit">
+          <input type="text" placeholder="文章关键字搜索..." onChange={onChange} value={userQuery} />
+          <div className="search_btn" onClick={onSearch} >
+            <SearchOutlined />
+          </div>
         </div>
-      </div>
-      <ul className="search_cont">
-        {
-          articleList.map((item, index) => {
-            return (
-              <Link key={'key' + index} to={{ pathname: `/article/${item.id}` }}>
-                <li className="search_cont_item">
-                  <div className="search_cont_icon">
-                    <FileOutlined />
-                  </div>
-                  <div className="search_item_cont">
-                    <div className="cont_item_title">
-                      <h1>{item.title}</h1>
-                      <div>
-                        <span className="search_action"></span>
-                        {item.text}
-                        </div>
-                    </div>
-                  </div>
-                  <div className="search_cont_icon">
-                    <LinkOutlined />
-                  </div>
-                </li>
-              </Link>
-            )
-          })
-        }
-      </ul>
-      <div>
-        {
-          articleList.length<=0 ? 
-            <p style={{ marginBottom: '20px', fontSize: '22px', textAlign: 'center' }}>: )</p>
-            : ''
-        }
-        <p style={{ fontSize: '18px' }}>
+        <ul className="search_cont">
           {
-            articleList.length<=0 ? '这里什么都么有，要不搜索看看' : '到底了'
+            articleList.map((item, index) => {
+              return (
+                <Link key={'key' + index} to={{ pathname: `/article/${item.id}` }}>
+                  <li className="search_cont_item">
+                    <div className="search_cont_icon">
+                      <FileOutlined />
+                    </div>
+                    <div className="search_item_cont">
+                      <div className="cont_item_title">
+                        <h1>{item.title}</h1>
+                        <div>
+                          <span className="search_action"></span>
+                          {item.text}
+                          </div>
+                      </div>
+                    </div>
+                    <div className="search_cont_icon">
+                      <LinkOutlined />
+                    </div>
+                  </li>
+                </Link>
+              )
+            })
           }
-        </p>
+        </ul>
+        <div>
+          {
+            articleList.length<=0 ? 
+              <p style={{ marginBottom: '20px', fontSize: '22px', textAlign: 'center' }}>: )</p>
+              : ''
+          }
+          <p style={{ fontSize: '18px' }}>
+            {
+              articleList.length<=0 ? '这里什么都么有，要不搜索看看' : '到底了'
+            }
+          </p>
+        </div>
       </div>
     </div>
   )

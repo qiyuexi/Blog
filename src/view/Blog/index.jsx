@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import request from '../../http/http'
 import useImg from '../../../public/img/img_1.jpg'
@@ -30,58 +30,61 @@ export default function Blog() {
       method: 'post',
       data: {
         page: 1,
-        pageSize: 4
+        pageSize: 10
       }
     }).then(res => {
-      console.log(res, '---');
       setBlogList([...res.data.list])
     })
   },[])
+
+  
   return (
     <>
       <ul className="cont_l">
         {
-          blogList.map(item => {
-            return (
-              <Link key={item.id} to={{ pathname: `/article/${item.id}` }}>
-                <li className="cont_l_item">
-                  {
-                    item.img ? (
-                      <div className="cont_item_img">
-                        <img src={item.img} alt="" />
+          blogList.length? blogList.map(item => {
+              return (
+                <Link key={item.id} to={{ pathname: `/article/${item.id}` }}>
+                  <li className="cont_l_item">
+                    {
+                      item.img ? (
+                        <div className="cont_item_img">
+                          <img src={item.img} alt="" />
+                        </div>
+                      ) : ''
+                    }
+                    <div className="cont_l_item_cont">
+                      <div className="cont_l_item_title">
+                        {item.title}
                       </div>
-                    ) : ''
-                  }
-                  <div className="cont_l_item_cont">
-                    <div className="cont_l_item_title">
-                      {item.title}
+                      <div className="cont_l_item_text">
+                        {item.text}
+                      </div>
+                      <div className="cont_l_item_tag">
+                        <ScheduleOutlined />
+                        <span className="cont_l_item_tag_span">
+                          {dateinit(item.time)}
+                        </span>
+                      </div>
+                      <ul className="cont_l_item_tag">
+                        {
+                          item.tag.map((tagItem,key) => {
+                            return (
+                              <li key={'tag'+ key}>
+                                <TagsOutlined />
+                                <span className="cont_l_item_tag_span">{tagItem.tag}</span>
+                              </li>
+                            )
+                          })
+                        }
+                      </ul>
                     </div>
-                    <div className="cont_l_item_text">
-                      {item.text}
-                    </div>
-                    <div className="cont_l_item_tag">
-                      <ScheduleOutlined />
-                      <span className="cont_l_item_tag_span">
-                        {dateinit(item.time)}
-                      </span>
-                    </div>
-                    <ul className="cont_l_item_tag">
-                      {
-                        item.tag.map((tagItem,key) => {
-                          return (
-                            <li key={'tag'+ key}>
-                              <TagsOutlined />
-                              <span className="cont_l_item_tag_span">{tagItem.tag}</span>
-                            </li>
-                          )
-                        })
-                      }
-                    </ul>
-                  </div>
-                </li>
-              </Link>
-            )
-          })
+                  </li>
+                </Link>
+              )
+            })
+            : 
+            <li>暂无文章。。。</li>
         }
       </ul>
       <div className="cont_r">

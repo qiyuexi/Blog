@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import request from '../../http/http'
+import './index.css'
 import {
   TagsOutlined,
 } from '@ant-design/icons';
@@ -22,7 +23,7 @@ export default function article() {
     })
   },[])
   return (
-    <div>
+    <div className='article'>
       {
         article.length > 0 ? (
           <>
@@ -42,7 +43,7 @@ export default function article() {
             <div>
               <img src={article[0].img|| ''} alt="" />
             </div>
-            <div>
+            <div className='article_text'>
               {article[0].text}
             </div>
           </>

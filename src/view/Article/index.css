@@ -1,0 +1,9 @@
+.article {
+  background: #fff;
+  padding: 20px;
+  flex: 1;
+}
+
+.article_text {
+  white-space: pre-wrap;
+}

@@ -1,7 +1,7 @@
 import api from './api'
 
 const request = (options) => {
-  console.log('options ---', options.url);
+  // console.log('options ---', options.url);
   options.method = options.method || 'get'
   if (options.method.toLowerCase() === 'get') {
     options.params = options.params

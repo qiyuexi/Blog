@@ -9,11 +9,10 @@
 }
   .search_style > h1 {
     font-size: 22px;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
   }
   .search_inpit {
     width: 80%;
-    margin: auto;
     position: relative;
   }
   .search_inpit input {
