@@ -27,12 +27,23 @@ export default function Blog() {
     }).then(res => {
       setLatestArticle([...res.data])
     })
-    req()
+    blogLists()
   },[page])
   const onScrol = () => {
     window.addEventListener('scroll', scorl)
   }
-  const req = () => {
+  
+  const scorl = () => {
+    const winH = window.innerHeight;
+    const top = document.documentElement.scrollTop
+    const h = listHeight.current.clientHeight + 40
+    const s = h - winH + 21
+    if (s - top  < 50) {
+      setPage(page+1)
+    }
+  }
+
+  const blogLists = () => {
     request({
       url: '/blog',
       method: 'post',
@@ -45,18 +56,7 @@ export default function Blog() {
       setBlogList(list)
     })
   }
-  const scorl = () => {
-    const winH = window.innerHeight;
-    const top = document.documentElement.scrollTop
-    const h = listHeight.current.clientHeight + 40
-    const s = h - winH + 21
-    console.log(s -top , '22--', top);
-    if (s - top  < 50) {
-      console.log('即将触底---');
-      setPage(page+1)
-      console.log(page, 'page---');
-    }
-  }
+
   return (
     <>
       <ul className="cont_l" ref={listHeight} onScroll={onScrol()}>
